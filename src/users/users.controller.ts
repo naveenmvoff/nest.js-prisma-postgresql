@@ -1,14 +1,29 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateUserDTO } from './create-user-dto';
+import { UsersService } from './users.service';
+// import { UsersService } from './users.service';
 
 @Controller('users')
-export class UsersController {    
+export class UsersController {
+    constructor(private userService:UsersService) {}
+    
     @Post('/signup')
-    Create(
+    async Create(
         @Body()
         createUserDTO : CreateUserDTO,
     ) {
-        console.log(typeof createUserDTO.blocked, typeof createUserDTO.email)
-        return createUserDTO
+        // console.log(typeof createUserDTO.blocked, typeof createUserDTO.email)
+        // return createUserDTO
+        return await this.userService.signup(createUserDTO);
+    }
+
+    @Post('/login')
+    async login(
+        @Body()
+        loginDTO : LoginDTO,
+    ) {
+        // console.log(typeof createUserDTO.blocked, typeof createUserDTO.email)
+        // return createUserDTO
+        return await this.userService.login(createUserDTO);
     }
 }
