@@ -1,4 +1,4 @@
 export interface SignupResponse{
-    id: number;
+    id: string;
     email: string
 }
